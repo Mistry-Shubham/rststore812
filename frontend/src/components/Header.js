@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { Flex, Heading, Link, Box, Icon } from '@chakra-ui/react';
 import { HiShoppingBag, HiUser, HiOutlineMenuAlt3 } from 'react-icons/hi';
 
 const MenuItems = ({ children, url }) => {
   return (
     <Link
-      href={url}
+      as={RouterLink}
+      to={url}
       mt={{ base: 4, md: 0 }}
       fontSize='sm'
       letterSpacing='wide'
@@ -46,7 +48,11 @@ const Header = () => {
           size='md'
           letterSpacing='md'
         >
-          <Link href='/' _hover={{ color: 'gray.500', textDecor: 'none' }}>
+          <Link
+            as={RouterLink}
+            to='/'
+            _hover={{ color: 'gray.500', textDecor: 'none' }}
+          >
             RST Store
           </Link>
         </Heading>
@@ -65,13 +71,13 @@ const Header = () => {
         width={{ base: 'full', md: 'auto' }}
         alignItems='center'
       >
-        <MenuItems url='/'>
+        <MenuItems url='/cart'>
           <Flex alignItems='center'>
             <Icon as={HiShoppingBag} w='4' h='4' mr='1' />
             Cart
           </Flex>
         </MenuItems>
-        <MenuItems url='/'>
+        <MenuItems url='/login'>
           <Flex alignItems='center'>
             <Icon as={HiUser} w='4' h='4' mr='1' />
             Login
