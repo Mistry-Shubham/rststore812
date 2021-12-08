@@ -1,0 +1,22 @@
+{
+  "name": "rststore",
+  "version": "1.0.0",
+  "description": "Ecommerce FullStack App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/rahulat4200/rststore812.git"
+  },
+  "author": "Rahul Sharma",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://gitlab.com/rahulat4200/rststore812/issues"
+  },
+  "homepage": "https://gitlab.com/rahulat4200/rststore812#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
