@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Heading, Grid } from '@chakra-ui/react';
-import Product from '../components/Product';
 import { listProducts } from '../actions/productActions';
+import Product from '../components/Product';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -20,9 +22,9 @@ const HomeScreen = () => {
         Latest Products
       </Heading>
       {loading ? (
-        <p>Loading...</p>
+        <Loader />
       ) : error ? (
-        <p>ERRROR!</p>
+        <Message type='error'>{error}</Message>
       ) : (
         <Grid templateColumns='repeat(4, 1fr)' gap='8'>
           {products.map((product) => (
