@@ -18,20 +18,23 @@ import {
 } from '@chakra-ui/react';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
-import { login } from '../actions/userActions';
+import { register } from '../actions/userActions';
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
   let [searchParams] = useSearchParams();
   let redirect = searchParams.get('redirect') || '/';
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState(null);
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
 
   useEffect(() => {
     if (userInfo) {
@@ -41,7 +44,11 @@ const LoginScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+    if (password !== confirmPassword) {
+      setMessage('Password do not match');
+    } else {
+      dispatch(register(name, email, password));
+    }
   };
 
   return (
@@ -52,8 +59,21 @@ const LoginScreen = () => {
         </Heading>
 
         {error && <Message type='error'>{error}</Message>}
+        {message && <Message type='error'>{message}</Message>}
 
         <form onSubmit={submitHandler}>
+          <FormControl id='name'>
+            <FormLabel>Name</FormLabel>
+            <Input
+              type='text'
+              placeholder='Your full name'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </FormControl>
+
+          <Spacer h='3' />
+
           <FormControl id='email'>
             <FormLabel>Email Address</FormLabel>
             <Input
@@ -74,21 +94,33 @@ const LoginScreen = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-
-            <Button type='submit' isLoading={loading} mt='4' colorScheme='teal'>
-              Login
-            </Button>
           </FormControl>
+
+          <Spacer h='3' />
+
+          <FormControl id='confirmPassword'>
+            <FormLabel>Confirm Password</FormLabel>
+            <Input
+              type='password'
+              placeholder='Type password again'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </FormControl>
+
+          <Button type='submit' isLoading={loading} mt='4' colorScheme='teal'>
+            Register
+          </Button>
         </form>
 
         <Flex pt='5'>
           <Text fontWeight='semibold'>
-            New Customer?{' '}
+            Have an account?{' '}
             <Link
               as={RouterLink}
-              to={redirect ? `/register?redirect=${redirect}` : '/register'}
+              to={redirect ? `/login?redirect=${redirect}` : '/login'}
             >
-              Register
+              Login
             </Link>
           </Text>
         </Flex>
@@ -97,4 +129,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
