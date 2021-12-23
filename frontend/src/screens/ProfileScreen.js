@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
-import { getUserDetails } from '../actions/userActions';
+import { getUserDetails, updateUserProfile } from '../actions/userActions';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -32,6 +32,9 @@ const ProfileScreen = () => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
 
   useEffect(() => {
     if (!userInfo) {
@@ -52,6 +55,7 @@ const ProfileScreen = () => {
       setMessage('Passwords do not match');
     } else {
       // DISPATCH UPDATE PROFILE
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
   };
 
@@ -65,6 +69,7 @@ const ProfileScreen = () => {
 
           {error && <Message type='error'>{error}</Message>}
           {message && <Message type='error'>{message}</Message>}
+          {success && <Message type='success'>Profile updated!</Message>}
 
           <form onSubmit={submitHandler}>
             <FormControl id='name'>
