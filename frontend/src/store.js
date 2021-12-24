@@ -16,7 +16,7 @@ import {
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
-  cart: cartReducer,
+  cart: cartReducer, // {cartItems: [], shippingAddress: {}, paymentMethod: {}}
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
