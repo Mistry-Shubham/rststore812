@@ -98,8 +98,7 @@ const PlaceOrderScreen = () => {
                     <Flex
                       key={idx}
                       alignItems='center'
-                      justifyContent='space-between'
-                    >
+                      justifyContent='space-between'>
                       <Flex py='2' alignItems='center'>
                         <Image
                           src={item.image}
@@ -113,8 +112,7 @@ const PlaceOrderScreen = () => {
                           as={RouterLink}
                           to={`/products/${item.product}`}
                           fontWeight='medium'
-                          fontSize='xl'
-                        >
+                          fontSize='xl'>
                           {item.name}
                         </Link>
                       </Flex>
@@ -139,8 +137,7 @@ const PlaceOrderScreen = () => {
           px='8'
           shadow='md'
           rounded='lg'
-          borderColor='gray.300'
-        >
+          borderColor='gray.300'>
           <Box>
             <Heading mb='6' as='h2' fontSize='3xl' fontWeight='bold'>
               Order Summary
@@ -152,8 +149,7 @@ const PlaceOrderScreen = () => {
               py='2'
               borderColor='gray.200'
               alignItems='center'
-              justifyContent='space-between'
-            >
+              justifyContent='space-between'>
               <Text fontSize='xl'>Items</Text>
               <Text fontWeight='bold' fontSize='xl'>
                 ₹{cart.itemsPrice}
@@ -166,8 +162,7 @@ const PlaceOrderScreen = () => {
               py='2'
               borderColor='gray.200'
               alignItems='center'
-              justifyContent='space-between'
-            >
+              justifyContent='space-between'>
               <Text fontSize='xl'>Shipping</Text>
               <Text fontWeight='bold' fontSize='xl'>
                 ₹{cart.shippingPrice}
@@ -180,8 +175,7 @@ const PlaceOrderScreen = () => {
               py='2'
               borderColor='gray.200'
               alignItems='center'
-              justifyContent='space-between'
-            >
+              justifyContent='space-between'>
               <Text fontSize='xl'>Tax</Text>
               <Text fontWeight='bold' fontSize='xl'>
                 ₹{cart.taxPrice}
@@ -189,7 +183,6 @@ const PlaceOrderScreen = () => {
             </Flex>
 
             {/* Total price */}
-            {/* Shipping price */}
             <Flex py='2' alignItems='center' justifyContent='space-between'>
               <Text fontSize='xl'>Total</Text>
               <Text fontWeight='bold' fontSize='xl' color='green.400'>
@@ -206,8 +199,7 @@ const PlaceOrderScreen = () => {
             colorScheme='yellow'
             type='button'
             disabled={cart.cartItems === 0}
-            onClick={placeOrderHandler}
-          >
+            onClick={placeOrderHandler}>
             Place Order
           </Button>
         </Flex>
