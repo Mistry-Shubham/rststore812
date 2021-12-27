@@ -35,7 +35,7 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate(`/${redirect}`);
+      navigate(redirect.length > 1 ? `/${redirect}` : `${redirect}`);
     }
   }, [navigate, redirect, userInfo]);
 
@@ -86,8 +86,7 @@ const LoginScreen = () => {
             New Customer?{' '}
             <Link
               as={RouterLink}
-              to={redirect ? `/register?redirect=${redirect}` : '/register'}
-            >
+              to={redirect ? `/register?redirect=${redirect}` : '/register'}>
               Register
             </Link>
           </Text>
