@@ -55,7 +55,7 @@ const RegisterScreen = () => {
     <Flex w='full' alignItems='center' justifyContent='center' py='5'>
       <FormContainer>
         <Heading as='h1' mb='8' fontSize='3xl'>
-          Login
+          Register
         </Heading>
 
         {error && <Message type='error'>{error}</Message>}
@@ -118,8 +118,7 @@ const RegisterScreen = () => {
             Have an account?{' '}
             <Link
               as={RouterLink}
-              to={redirect ? `/login?redirect=${redirect}` : '/login'}
-            >
+              to={redirect ? `/login?redirect=${redirect}` : '/login'}>
               Login
             </Link>
           </Text>
