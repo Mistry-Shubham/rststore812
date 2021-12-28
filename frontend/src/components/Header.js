@@ -30,8 +30,7 @@ const MenuItems = ({ children, url }) => {
       textTransform='uppercase'
       mr='5'
       display='block'
-      _hover={{ color: 'whiteAlpha.800' }}
-    >
+      _hover={{ color: 'whiteAlpha.800' }}>
       {children}
     </Link>
   );
@@ -63,21 +62,18 @@ const Header = () => {
       w='100%'
       top='0'
       zIndex='2'
-      pos='fixed'
-    >
+      pos='fixed'>
       <Flex align='center' mr='5'>
         <Heading
           as='h1'
           color='whiteAlpha.800'
           fontWeight='bold'
           size='md'
-          letterSpacing='md'
-        >
+          letterSpacing='md'>
           <Link
             as={RouterLink}
             to='/'
-            _hover={{ color: 'gray.500', textDecor: 'none' }}
-          >
+            _hover={{ color: 'gray.500', textDecor: 'none' }}>
             RST Store
           </Link>
         </Heading>
@@ -85,8 +81,7 @@ const Header = () => {
 
       <Box
         display={{ base: 'block', md: 'none', sm: 'block' }}
-        onClick={() => setShow(!show)}
-      >
+        onClick={() => setShow(!show)}>
         <Icon as={HiOutlineMenuAlt3} color='white' w='6' h='6' />
         <title>Menu</title>
       </Box>
@@ -94,8 +89,7 @@ const Header = () => {
       <Box
         display={{ base: show ? 'block' : 'none', md: 'flex' }}
         width={{ base: 'full', md: 'auto' }}
-        alignItems='center'
-      >
+        alignItems='center'>
         <MenuItems url='/cart'>
           <Flex alignItems='center'>
             <Icon as={HiShoppingBag} w='4' h='4' mr='1' />
@@ -109,8 +103,7 @@ const Header = () => {
             <MenuButton
               as={Button}
               rightIcon={<IoChevronDown />}
-              _hover={{ textDecoration: 'none', opacity: '0.7' }}
-            >
+              _hover={{ textDecoration: 'none', opacity: '0.7' }}>
               {userInfo.name}
             </MenuButton>
             <MenuList url='/login'>
@@ -127,6 +120,33 @@ const Header = () => {
               Login
             </Flex>
           </MenuItems>
+        )}
+
+        {/* Admin Menu */}
+        {userInfo && userInfo.isAdmin && (
+          <Menu>
+            <MenuButton
+              ml='5'
+              color='white'
+              fontSize='sm'
+              fontWeight='semibold'
+              as={Link}
+              textTransform='uppercase'
+              _hover={{ textDecoration: 'none', opacity: '0.7' }}>
+              Manage <Icon as={IoChevronDown} />
+            </MenuButton>
+            <MenuList>
+              <MenuItem as={RouterLink} to='/admin/userlist'>
+                All Users
+              </MenuItem>
+              <MenuItem as={RouterLink} to='/admin/productlist'>
+                All Products
+              </MenuItem>
+              <MenuItem as={RouterLink} to='/admin/orderlist'>
+                All Orders
+              </MenuItem>
+            </MenuList>
+          </Menu>
         )}
       </Box>
     </Flex>
