@@ -17,7 +17,7 @@ import {
 import { IoPencilSharp, IoTrashBinSharp, IoAdd } from 'react-icons/io5';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { listProducts } from '../actions/productActions';
+import { listProducts, deleteProduct } from '../actions/productActions';
 
 const ProductListScreen = () => {
   const dispatch = useDispatch();
@@ -29,17 +29,24 @@ const ProductListScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete;
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listProducts());
     } else {
       navigate('/login');
     }
-  }, [dispatch, navigate, userInfo]);
+  }, [dispatch, navigate, userInfo, successDelete]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
-      // DELETE PRODUCT
+      dispatch(deleteProduct(id));
     }
   };
 
@@ -58,6 +65,9 @@ const ProductListScreen = () => {
           Product
         </Button>
       </Flex>
+
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message type='error'>{errorDelete}</Message>}
 
       {loading ? (
         <Loader />
